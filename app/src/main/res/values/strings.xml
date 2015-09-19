@@ -3,4 +3,22 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="start_footer">Maciej Wolański 2015</string>
+    <string name="text_take_pictures">Zrób zdjęcia</string>
+    <string name="text_choose_pictures">Wybierz z galerii</string>
+    <string name="text_your_pictures">Twoje skany</string>
+    <string name="title_activity_gallery">GalleryActivity</string>
+    <string name="text_tag">Tytuł</string>
+    <string name="title_activity_image_preview">ImagePreviewActivity</string>
+    <string name="text_image_settings">Co zrobić?</string>
+    <string name="text_start_processing">Rozpocznij</string>
+    <string name="title_activity_pre_printify">PrePrintifyActivity</string>
+
+
+
+
+
+    <string name="gallery_choose">Gallery Select</string>
+    <string name="camera_choose">Now Photograph</string>
 </resources>
