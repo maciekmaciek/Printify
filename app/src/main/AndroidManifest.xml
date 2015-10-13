@@ -37,7 +37,7 @@
             android:label="@string/title_activity_image_preview" >
         </activity>
         <activity
-            android:name=".Activities.PrePrintifyActivity"
+            android:name=".Activities.PrintifyActivity"
             android:label="@string/title_activity_pre_printify" >
         </activity>
         <activity

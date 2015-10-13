@@ -9,27 +9,19 @@ package com.maciekwski.printify.Activities;
         import android.support.v7.app.AppCompatActivity;
         import android.support.v7.widget.Toolbar;
         import android.util.Log;
-        import android.util.TypedValue;
-        import android.view.LayoutInflater;
         import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.FrameLayout;
         import android.widget.GridView;
 
-        import android.widget.ImageView;
         import com.maciekwski.printify.Adapters.PictureAdapter;
+        import com.maciekwski.printify.ImageProcessing.ProcessingOption;
         import com.maciekwski.printify.R;
-        import net.soulwolf.image.picturelib.PictureFrom;
         import net.soulwolf.image.picturelib.PictureProcess;
-        import net.soulwolf.image.picturelib.listener.OnPicturePickListener;
         import nl.changer.polypicker.Config;
         import nl.changer.polypicker.ImagePickerActivity;
-        import nl.changer.polypicker.utils.ImageInternalFetcher;
 
-        import java.io.File;
         import java.util.ArrayList;
+        import java.util.HashMap;
         import java.util.HashSet;
-        import java.util.Iterator;
         import java.util.List;
 
 
@@ -46,7 +38,7 @@ public class GalleryActivity extends AppCompatActivity {
     GridView mPictureGrid;
 
     List<Uri> mPictureList;
-
+    HashMap<ProcessingOption, Boolean> processingOptions;
     PictureAdapter mPictureAdapter;
 
     private static final String TAG = GalleryActivity.class.getSimpleName();
@@ -68,7 +60,17 @@ public class GalleryActivity extends AppCompatActivity {
         mPictureList = new ArrayList<>();
         mPictureAdapter = new PictureAdapter(this,mPictureList);
         mPictureGrid.setAdapter(mPictureAdapter);
+        initProcessingOptions();
     }
+
+    private void initProcessingOptions() {
+        processingOptions = new HashMap<>();
+        processingOptions.put(ProcessingOption.A, true);
+        processingOptions.put(ProcessingOption.B, true);
+        processingOptions.put(ProcessingOption.C, true);
+        processingOptions.put(ProcessingOption.D, true);
+    }
+
 
     public void getImages(View v) {
         Intent intent = new Intent(mContext, ImagePickerActivity.class);
@@ -156,5 +158,12 @@ public class GalleryActivity extends AppCompatActivity {
             mPictureList.addAll(mMedia);
         }
         mPictureAdapter.notifyDataSetChanged();
+    }
+
+    public void startPrintify(View view) {
+        //TODO add options
+        Intent intent = new Intent(mContext, PrintifyActivity.class);
+        intent.putParcelableArrayListExtra("imageList", (ArrayList<Uri>)mPictureList);
+        startActivity(intent);
     }
 }
