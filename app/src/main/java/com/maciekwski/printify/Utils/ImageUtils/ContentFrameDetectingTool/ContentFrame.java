@@ -1,5 +1,6 @@
 package com.maciekwski.printify.Utils.ImageUtils.ContentFrameDetectingTool;
 
+
 import android.graphics.Point;
 
 import java.util.ArrayList;

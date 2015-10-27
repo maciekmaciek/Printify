@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.maciekwski.printify" >
+
     <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -30,7 +34,7 @@
         </activity>
         <activity
             android:name=".Activities.GalleryActivity"
-            android:label="@string/title_activity_gallery">
+            android:label="@string/title_activity_gallery" >
         </activity>
         <activity
             android:name=".Activities.ImagePreviewActivity"
@@ -40,8 +44,11 @@
             android:name=".Activities.PrintifyActivity"
             android:label="@string/title_activity_pre_printify" >
         </activity>
+        <activity android:name="nl.changer.polypicker.ImagePickerActivity" />
         <activity
-                android:name="nl.changer.polypicker.ImagePickerActivity" />
+            android:name=".Activities.VerticesSetter.VerticesSetterActivity"
+            android:label="@string/title_activity_set_vertices" >
+        </activity>
     </application>
 
 </manifest>

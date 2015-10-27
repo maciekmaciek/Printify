@@ -12,6 +12,7 @@ package com.maciekwski.printify.Activities;
         import android.view.View;
         import android.widget.GridView;
 
+        import com.maciekwski.printify.Activities.VerticesSetter.VerticesSetterActivity;
         import com.maciekwski.printify.Adapters.PictureAdapter;
         import com.maciekwski.printify.ImageProcessing.ProcessingOption;
         import com.maciekwski.printify.R;
@@ -160,9 +161,9 @@ public class GalleryActivity extends AppCompatActivity {
         mPictureAdapter.notifyDataSetChanged();
     }
 
-    public void startPrintify(View view) {
+    public void startVerticesSetting(View view) {
         //TODO add options
-        Intent intent = new Intent(mContext, PrintifyActivity.class);
+        Intent intent = new Intent(mContext, VerticesSetterActivity.class);
         intent.putParcelableArrayListExtra("imageList", (ArrayList<Uri>)mPictureList);
         startActivity(intent);
     }

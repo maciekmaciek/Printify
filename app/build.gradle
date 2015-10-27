@@ -42,4 +42,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'net.soulwolf.image:pictureChoose:1.0.0'
     compile 'com.github.jaydeepw:poly-picker:v1.0.22'
+    compile 'gov.nist.math:jama:1.0.3'
+
 }
