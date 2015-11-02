@@ -2,6 +2,8 @@ package com.maciekwski.printify.Activities.VerticesSetter;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,7 +11,9 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import com.maciekwski.printify.Activities.PrintifyActivity;
 import com.maciekwski.printify.Adapters.VerticesSetterPagerAdapter;
 import com.maciekwski.printify.R;
@@ -53,6 +57,9 @@ public class VerticesSetterActivity extends FragmentActivity {
         verticesPager = (ViewPager) findViewById(R.id.vertices_pager);
         verticesPagerAdapter = new VerticesSetterPagerAdapter(getSupportFragmentManager(), imagesToDisplay);
         verticesPager.setAdapter(verticesPagerAdapter);
+        PageChangeListener pageChangeListener = new PageChangeListener();
+        verticesPager.addOnPageChangeListener(pageChangeListener);
+        ((TextView)findViewById(R.id.text_view_page_num)).setText(1 + " / " +verticesPagerAdapter.getCount());
 
     }
 
@@ -96,5 +103,23 @@ public class VerticesSetterActivity extends FragmentActivity {
         Intent intent = new Intent(getApplicationContext(), PrintifyActivity.class);
         intent.putParcelableArrayListExtra("imageList", imagesToDisplay);
         startActivity(intent);
+    }
+
+    private class PageChangeListener implements ViewPager.OnPageChangeListener {
+
+        TextView indicator = (TextView)findViewById(R.id.text_view_page_num);
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            indicator.setText((position+1) + " / " + verticesPagerAdapter.getCount());
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
     }
 }

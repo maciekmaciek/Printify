@@ -17,7 +17,7 @@ public class BitmapFrameCreator {
         ArrayList<Bitmap> result = new ArrayList<>();
         for (Bitmap bitmap :
                 sourceBitmaps) {
-            addFrameToSingleImage(bitmap, ratio);
+            result.add(addFrameToSingleImage(bitmap, ratio));
         }
         return result;
     }

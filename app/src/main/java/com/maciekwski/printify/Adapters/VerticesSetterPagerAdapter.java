@@ -25,9 +25,10 @@ public class VerticesSetterPagerAdapter extends FragmentStatePagerAdapter {
 
         @Override
         public Fragment getItem(int position) {
-            VerticesSetterFragment fragment = new VerticesSetterFragment(imageUris.get(position));
+            VerticesSetterFragment fragment = VerticesSetterFragment.newInstance(imageUris.get(position));
             return fragment;
         }
+
 
     @Override
     public int getCount() {

@@ -3,9 +3,9 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
-    <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/image_view_set_vertices"/>
+        <com.maciekwski.printify.Activities.VerticesSetter.FrameView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/frame_view_set_vertices" android:background="#00c5ff71">
+        </com.maciekwski.printify.Activities.VerticesSetter.FrameView>
 </LinearLayout>

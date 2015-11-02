@@ -16,7 +16,7 @@
                 android:layout_width="200dp"
                 android:layout_height="100dp"
                 android:id="@+id/imageView2" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
-                android:layout_marginTop="84dp" android:background="@android:color/holo_green_dark"
+                android:layout_marginTop="84dp" android:background="@color/SeaGreen"
                 android:layout_margin="100dp"/>
     </RelativeLayout>
     <RelativeLayout

@@ -14,13 +14,9 @@
     <string name="text_image_settings">Co zrobić?</string>
     <string name="text_start_processing">Rozpocznij</string>
     <string name="title_activity_pre_printify">PrePrintifyActivity</string>
-
-
-
-
-
     <string name="gallery_choose">Gallery Select</string>
     <string name="camera_choose">Now Photograph</string>
     <string name="text_convert">Konwertuj!</string>
     <string name="title_activity_set_vertices">SetVerticesActivity</string>
+    <string name="text_start_printify">Czyść obrazy</string>
 </resources>

@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Config;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,7 +21,7 @@ public class ImageLoader {
     public static ArrayList<Bitmap> loadImagesFromUri(ArrayList<Uri> imageUris, Context context){
         ArrayList<Bitmap> result = new ArrayList<>();
         for(Uri uri : imageUris){
-            result.add(loadSingleImageFromUri(uri, context));
+            result.add(loadSingleImageFromUri(fixUri(uri), context));
         }
         return result;
     }
@@ -38,8 +40,13 @@ public class ImageLoader {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         options.inSampleSize = 2;
-        result = BitmapFactory.decodeFile(uri.getPath(), options);
+        //result = BitmapFactory.decodeFile(uri.getPath(), options);
+        result = BitmapFactory.decodeFile(uri.getPath());
 
         return result;
+    }
+
+    private static Uri fixUri(Uri invalidUri){
+        return Uri.withAppendedPath(Uri.parse("file:///"), invalidUri.getPath());
     }
 }
