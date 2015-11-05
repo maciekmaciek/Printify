@@ -4,6 +4,9 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
     defaultConfig {
         applicationId "com.maciekwski.printify"
         minSdkVersion 19
@@ -43,5 +46,12 @@ dependencies {
     compile 'net.soulwolf.image:pictureChoose:1.0.0'
     compile 'com.github.jaydeepw:poly-picker:v1.0.22'
     compile 'gov.nist.math:jama:1.0.3'
+
+    // Unit testing dependencies
+    testCompile 'junit:junit:4.12'
+    // Set this dependency if you want to use Mockito
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    // Set this dependency if you want to use Hamcrest matching
+    testCompile 'org.hamcrest:hamcrest-library:1.1'
 
 }

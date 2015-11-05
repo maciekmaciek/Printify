@@ -12,17 +12,17 @@ import java.util.ArrayList;
  * maciekwski@gmail.com
  * on 27.10.2015.
  */
-public class BitmapFrameCreator {
-    public static ArrayList<Bitmap> addFramesToImages(ArrayList<Bitmap> sourceBitmaps, double ratio) {
+public class BitmapBorderCreator {
+    public static ArrayList<Bitmap> addBordersToImages(ArrayList<Bitmap> sourceBitmaps, double ratio) {
         ArrayList<Bitmap> result = new ArrayList<>();
         for (Bitmap bitmap :
                 sourceBitmaps) {
-            result.add(addFrameToSingleImage(bitmap, ratio));
+            result.add(addBorderToSingleImage(bitmap, ratio));
         }
         return result;
     }
 
-    private static Bitmap addFrameToSingleImage(Bitmap image, double ratio){
+    private static Bitmap addBorderToSingleImage(Bitmap image, double ratio){
         int oldWidth = image.getWidth();
         int oldHeight = image.getHeight();
 

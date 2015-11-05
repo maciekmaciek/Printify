@@ -2,8 +2,7 @@ package com.maciekwski.printify.Activities.VerticesSetter;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -11,7 +10,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import com.maciekwski.printify.Activities.PrintifyActivity;
@@ -20,7 +18,9 @@ import com.maciekwski.printify.R;
 import com.maciekwski.printify.Utils.IO.ImageDisposer;
 import com.maciekwski.printify.Utils.IO.ImageLoader;
 import com.maciekwski.printify.Utils.IO.ImageSaver;
-import com.maciekwski.printify.Utils.ImageUtils.BitmapFrameCreator;
+import com.maciekwski.printify.Utils.ImageUtils.BitmapBorderCreator;
+import com.maciekwski.printify.Utils.ImageUtils.PerspectiveTransformTool.BitmapTransformer;
+import com.maciekwski.printify.Utils.ImageUtils.PerspectiveTransformTool.BitmapWithContentVertices;
 
 import java.util.ArrayList;
 
@@ -29,18 +29,23 @@ public class VerticesSetterActivity extends FragmentActivity {
     private ViewPager verticesPager;
     private PagerAdapter verticesPagerAdapter;
     private ArrayList<Uri> imagesToDisplay;
+    private ArrayList<Bitmap> newBitmaps;
+    Point[][] allVertices;
+    int height;
+    int width;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.changeImages();
         setContentView(R.layout.activity_set_vertices);
+        allVertices = new Point[imagesToDisplay.size()][];
         this.preparePager();
 
     }
 
     private void changeImages() {
         this.imagesToDisplay = getIntent().getParcelableArrayListExtra("imageList");
-        ArrayList<Bitmap> newBitmaps = this.loadImagesIntoNewBitmaps();
+        newBitmaps = this.loadImagesIntoNewBitmaps();
         imagesToDisplay = this.saveNewImageBitmaps(newBitmaps);
     }
 
@@ -50,7 +55,7 @@ public class VerticesSetterActivity extends FragmentActivity {
 
     private ArrayList<Bitmap> loadImagesIntoNewBitmaps() {
         ArrayList<Bitmap> result = ImageLoader.loadImagesFromUri(imagesToDisplay, getApplicationContext());
-        return BitmapFrameCreator.addFramesToImages(result, FRAMED_TO_ORIGINAL_RATIO);
+        return BitmapBorderCreator.addBordersToImages(result, FRAMED_TO_ORIGINAL_RATIO);
     }
 
     private void preparePager() {
@@ -101,8 +106,45 @@ public class VerticesSetterActivity extends FragmentActivity {
     public void startPrintify(View view) {
         //TODO add options
         Intent intent = new Intent(getApplicationContext(), PrintifyActivity.class);
+        ArrayList<BitmapWithContentVertices> bitmapsWithContentVertices = this.createBWCV();
+        ArrayList<Bitmap> transformedBitmpas = this.transformAllBitmaps(bitmapsWithContentVertices);
+
+        ImageDisposer.deleteImages(imagesToDisplay, getApplicationContext()); //delete old bitmaps
+        this.imagesToDisplay = saveNewImageBitmaps(transformedBitmpas);         //save new bitmaps
         intent.putParcelableArrayListExtra("imageList", imagesToDisplay);
         startActivity(intent);
+    }
+
+    private ArrayList<BitmapWithContentVertices> createBWCV() {
+        ArrayList<RelativeVertices> relVert = new ArrayList<>();
+        for(Point[] pArr : allVertices){
+            relVert.add(new RelativeVertices(pArr, width, height));
+        }
+
+
+        ArrayList<BitmapWithContentVertices> result = new ArrayList<>();
+        for(int i = 0; i< allVertices.length; i++){
+            Bitmap loaded = newBitmaps.get(i);
+            Point loadedSize = new Point(loaded.getWidth(), loaded.getHeight());
+            result.add(new BitmapWithContentVertices(
+                    RelativeToRealVerticesTransformer.transform(relVert.get(i),loadedSize),
+                    loaded));
+        }
+
+        return result;
+    }
+
+    private ArrayList<Bitmap> transformAllBitmaps(ArrayList<BitmapWithContentVertices> bitmapsWithContentVertices) {
+        ArrayList<Bitmap> result = new ArrayList<>();
+        for(BitmapWithContentVertices b: bitmapsWithContentVertices){
+            result.add(this.transformSingleBitmap(b));
+        }
+        return result;
+    }
+
+    private Bitmap transformSingleBitmap(BitmapWithContentVertices b) {
+        BitmapTransformer bt = new BitmapTransformer(b);
+        return bt.transformImage();
     }
 
     private class PageChangeListener implements ViewPager.OnPageChangeListener {

@@ -18,7 +18,6 @@ import java.util.ArrayList;
  * on 29.10.2015.
  */
 public class FrameView extends ImageView {
-    private static final float TOUCH_TOLERANCE = 50;
     Point[] vertices;
     private Bitmap mBitmap;
     private Bitmap underlyingImage;
@@ -82,58 +81,7 @@ public class FrameView extends ImageView {
         mCanvas.drawPath(polygonPath, insidePaint);
 
     }
-    private int currentPoint = -1;
 
-    private int touch_start(float x, float y) {
-
-        for(int i = 0; i < vertices.length; i++){
-            if(this.isClose(x,y, vertices[i])){
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private boolean isClose(float x, float y, Point vertice) {
-        float dx = Math.abs(x - vertice.x);
-        float dy = Math.abs(y - vertice.y);
-        return dx <= TOUCH_TOLERANCE && dy <= TOUCH_TOLERANCE;
-    }
-
-    private void touch_move(float x, float y) {
-        vertices[currentPoint].x = (int)x;
-        vertices[currentPoint].y = (int)y;
-    }
-
-    private void touch_up(float x, float y) {
-        vertices[currentPoint].x = (int)x;
-        vertices[currentPoint].y = (int)y;
-        currentPoint = -1;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        float x = event.getX();
-        float y = event.getY();
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                currentPoint = touch_start(x, y);
-                return currentPoint != -1;
-            case MotionEvent.ACTION_MOVE:
-                if (currentPoint != -1) {
-                    touch_move(x, y);
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                if (currentPoint != -1) {
-                    touch_up(x, y);
-                }
-        }
-
-        postInvalidate();
-        return true;
-    }
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);

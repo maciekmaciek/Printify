@@ -16,15 +16,15 @@ public class BitmapTransformer {
     private Point[] finalVertices;
     private Matrix transformMatrix;
 
-    public BitmapTransformer(Bitmap imageToTransform, Point[] contentVertices){
-        this.imageToTransform = imageToTransform;
-        this.contentVertices = contentVertices;
+    public BitmapTransformer(BitmapWithContentVertices bitmapWithContentVertices){
+        this.imageToTransform = bitmapWithContentVertices.bitmap;
+        this.contentVertices = bitmapWithContentVertices.contentVertices;
         this.finalVertices = ResultRectangleBuilder.buildFromVertices(contentVertices);
         TransformMatrixBuilder transformMatrixBuilder = new TransformMatrixBuilder(contentVertices, finalVertices);
         this.transformMatrix = transformMatrixBuilder.generateTransformMatrix();
     }
 
-    public Bitmap transformImage() throws Exception{
+    public Bitmap transformImage(){
         Bitmap resultBitmap = this.createNewSizedBitmap();
         for(int i = 0; i<resultBitmap.getWidth(); i++){
             this.transformSingleRow(i, resultBitmap);
