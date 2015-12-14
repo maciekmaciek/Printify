@@ -1,9 +1,14 @@
 package com.maciekwski.printify.Utils.ImageUtils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.RectF;
+import android.net.Uri;
+import com.maciekwski.printify.Utils.IO.ImageDisposer;
+import com.maciekwski.printify.Utils.IO.ImageLoader;
+import com.maciekwski.printify.Utils.IO.ImageSaver;
 
 import java.util.ArrayList;
 
@@ -13,11 +18,16 @@ import java.util.ArrayList;
  * on 27.10.2015.
  */
 public class BitmapBorderCreator {
-    public static ArrayList<Bitmap> addBordersToImages(ArrayList<Bitmap> sourceBitmaps, double ratio) {
-        ArrayList<Bitmap> result = new ArrayList<>();
-        for (Bitmap bitmap :
-                sourceBitmaps) {
-            result.add(addBorderToSingleImage(bitmap, ratio));
+    public static ArrayList<Uri> addBordersToImagesSaveThemToGetUris(ArrayList<Uri> sourceUris, double ratio, Context context) {
+        ArrayList<Uri> result = new ArrayList<>();
+        Bitmap workerBitmap;
+
+        for (Uri uri :
+                sourceUris) {
+            workerBitmap = ImageLoader.loadSingleImageFromUri(uri, context);
+            workerBitmap = addBorderToSingleImage(workerBitmap, ratio);
+            result.add(ImageSaver.saveSingleImageReturnUri(workerBitmap, result.size()));
+            workerBitmap.recycle();
         }
         return result;
     }
@@ -33,11 +43,13 @@ public class BitmapBorderCreator {
         int offsetTop = (int)((ratio - 1)/2 * oldHeight);
 
         RectF targetRect = new RectF(offsetLeft, offsetTop, offsetLeft + oldWidth, offsetTop + oldHeight);
+
         Bitmap result = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
         Canvas bitmapCanvas = new Canvas(result);
 
         bitmapCanvas.drawColor(Color.WHITE);
         bitmapCanvas.drawBitmap(image, null, targetRect, null);
-        return result;
+        image = result;
+        return image;
     }
 }

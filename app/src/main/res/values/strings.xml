@@ -18,5 +18,8 @@
     <string name="camera_choose">Now Photograph</string>
     <string name="text_convert">Konwertuj!</string>
     <string name="title_activity_set_vertices">SetVerticesActivity</string>
-    <string name="text_start_printify">Czyść obrazy</string>
+    <string name="text_start_printify">Kadruj</string>
+    <string name="text_continue_printify">Konwertuj</string>
+    <string name="text_finish_printify">Zakończ</string>
+    <string name="title_activity_post_printify">PostPrintifyActivity</string>
 </resources>

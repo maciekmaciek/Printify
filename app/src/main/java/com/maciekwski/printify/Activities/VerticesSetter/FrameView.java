@@ -2,15 +2,10 @@ package com.maciekwski.printify.Activities.VerticesSetter;
 
 import android.content.Context;
 import android.graphics.*;
-import android.media.Image;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ImageView;
 import com.maciekwski.printify.R;
-import com.maciekwski.printify.Utils.TouchImageView;
-
-import java.util.ArrayList;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Maciej Wolański
@@ -44,12 +39,12 @@ public class FrameView extends ImageView {
 
         framePaint = new Paint(Paint.DITHER_FLAG);
         framePaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        framePaint.setStrokeJoin(Paint.Join.BEVEL);
-        framePaint.setColor(getResources().getColor(R.color.SeaGreen));
+        framePaint.setStrokeJoin(Paint.Join.ROUND);
+        framePaint.setColor(getResources().getColor(R.color.TransparentPrintifyGreen));
         framePaint.setStrokeWidth(15f);
 
         insidePaint = new Paint(Paint.DITHER_FLAG);
-        insidePaint.setColor(getResources().getColor(R.color.TransparentSeaGreen));
+        insidePaint.setColor(getResources().getColor(R.color.VeryTransparentPrintifyGreen));
         insidePaint.setStyle(Paint.Style.FILL_AND_STROKE);
         insidePaint.setStrokeJoin(Paint.Join.BEVEL);
     }

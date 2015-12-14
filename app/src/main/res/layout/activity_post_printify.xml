@@ -1,0 +1,34 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                tools:context="com.maciekwski.printify.Activities.PrintifyProcess.PostPrintifyActivity"
+                android:background="@color/SeaGreen">
+
+        <android.support.v4.view.ViewPager
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/post_printify_pager"
+                android:layout_above="@+id/button_finish_printify"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Small Text"
+                android:id="@+id/text_view_page_num"
+                android:minHeight="20dp" android:layout_alignParentRight="true" android:layout_alignParentBottom="true"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/text_finish_printify"
+                android:id="@+id/button_finish_printify"
+                android:background="@drawable/rounded_button"
+                android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
+                android:minHeight="20dp" android:onClick="finishPrintify"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" android:layout_margin="5dp"/>
+</RelativeLayout>

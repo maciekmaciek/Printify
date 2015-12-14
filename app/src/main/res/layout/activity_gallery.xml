@@ -2,25 +2,27 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/pc_default_pager">
+              android:background="@color/SeaGreen">
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="127dp">
+            android:layout_height="127dp"
+            android:background="@color/SeaGreen">
         <Button
-                android:text="@string/gallery_choose"
+                android:text="Wybierz zdjęcia"
                 android:layout_width="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/button_background_selector"
-                android:layout_height="match_parent" android:layout_weight="0.5" android:onClick="getImages"/>
-        <Button android:text="@string/text_convert" android:layout_width="match_parent"
+                android:background="@drawable/rounded_button"
+                android:layout_height="match_parent" android:layout_weight="0.5" android:onClick="getImages"
+                android:id="@+id/button_choose_images"/>
+        <Button android:text="Rozpocznij edycję" android:layout_width="match_parent"
                 android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
                 android:textColor="@android:color/white" android:layout_marginTop="10dp"
-                android:background="@drawable/button_background_selector" android:layout_height="match_parent"
+                android:background="@drawable/rounded_button" android:layout_height="match_parent"
                 android:layout_weight="0.5" android:onClick="startVerticesSetting" android:id="@+id/button2"/>
     </LinearLayout>
     <GridView

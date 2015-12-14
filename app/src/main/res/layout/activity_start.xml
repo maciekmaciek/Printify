@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -6,54 +6,47 @@
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
               android:paddingBottom="@dimen/activity_vertical_margin"
-              tools:context=".StartActivity" android:background="@android:color/holo_green_light"
+              tools:context=".StartActivity" android:background="@color/SeaGreen"
               android:orientation="vertical">
 
-    <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:layout_alignParentEnd="false" android:id="@+id/start_top">
-        <ImageView
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-                android:id="@+id/imageView2" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
-                android:layout_marginTop="84dp" android:background="@color/SeaGreen"
-                android:layout_margin="100dp"/>
-    </RelativeLayout>
-    <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center" android:id="@+id/start_bottom" android:focusable="true">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/start_footer"
-                android:id="@+id/textview_start_footer" android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:textColor="#de363636"/>
-        <TableLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:layout_alignParentTop="false"
-                android:id="@+id/table_start_buttons"
-                android:layout_centerInParent="true">
-            <Button
+    <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageView
                     android:layout_width="wrap_content"
+                    android:layout_height="180dp"
+                    android:id="@+id/imageView" android:src="@drawable/logo" android:layout_marginTop="50dp"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <RelativeLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_take_pictures"
-                    android:id="@+id/button_take_pictures"
-                    android:onClick="startActivityOnClick"/>
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_choose_pictures"
-                    android:id="@+id/button_from_gallery"
-                    android:onClick="startActivityOnClick"/>
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_your_pictures"
-                    android:id="@+id/button_your_pictures"
-                    android:onClick="startActivityOnClick"/>
-        </TableLayout>
-    </RelativeLayout>
-</LinearLayout>
+                    android:id="@+id/start_bottom" android:focusable="true"
+                    android:layout_alignParentBottom="true" android:layout_centerInParent="true"
+                    android:layout_below="@+id/start_top" android:visibility="visible"
+                    android:layout_column="0" android:layout_gravity="center" android:gravity="center_vertical|center_horizontal">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/start_footer"
+                        android:id="@+id/textview_start_footer" android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="#de363636"/>
+                <Button
+                        android:layout_width="228dp"
+                        android:layout_height="100dp"
+                        android:text="Start!"
+                        android:id="@+id/button_from_gallery"
+                        android:onClick="startActivityOnClick"
+                        android:layout_centerVertical="true" android:layout_centerHorizontal="true"
+                        android:background="@drawable/rounded_button" android:textSize="30dp"/>
+            </RelativeLayout>
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>

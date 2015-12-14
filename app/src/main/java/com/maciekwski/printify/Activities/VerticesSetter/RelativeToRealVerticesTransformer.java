@@ -11,10 +11,11 @@ import android.graphics.Rect;
 public class RelativeToRealVerticesTransformer {
     public static Point[] transform(RelativeVertices relV, Point realSize){
         Point[] result = new Point[4];
-        double ratio = (double)realSize.y/relV.height;
+        double heightRatio = (double)realSize.y/relV.height;
+        double widthRatio = (double)realSize.x/relV.width;
 
         for(int i = 0; i < 4; i++){
-            result[i] = new Point((int)(ratio*relV.vertices[i].x), (int)(ratio*relV.vertices[i].y));
+            result[i] = new Point((int)(widthRatio*relV.vertices[i].x), (int)(heightRatio*relV.vertices[i].y));
         }
 
         return result;

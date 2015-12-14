@@ -11,7 +11,7 @@ public class ResultRectangleBuilder {
     private final static double RECTANGLE_RATIO = 0.75;
 
     public static Point[] buildFromVertices(Point[] vertices){
-        int width = calculateDistance(vertices[0], vertices[1]);
+        int width = Math.max(calculateDistance(vertices[0], vertices[1]), calculateDistance(vertices[3], vertices[2]));
         int height = calculateHeight(width);
         Point[] result = createVertices(width, height);
         return result;

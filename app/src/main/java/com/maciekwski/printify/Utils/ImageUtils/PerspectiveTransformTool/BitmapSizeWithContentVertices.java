@@ -8,12 +8,14 @@ import android.graphics.Point;
  * maciekwski@gmail.com
  * on 02.11.2015.
  */
-public class BitmapWithContentVertices {
-    Bitmap bitmap;
+public class BitmapSizeWithContentVertices {
     Point[] contentVertices;
+    int width;
+    int height;
 
-    public BitmapWithContentVertices(Point[] contentVertices, Bitmap bitmap) {
+    public BitmapSizeWithContentVertices(Point[] contentVertices, int width, int height) {
         this.contentVertices = contentVertices;
-        this.bitmap = bitmap;
+        this.width = width;
+        this.height = height;
     }
 }

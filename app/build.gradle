@@ -41,11 +41,6 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'net.soulwolf.image:pictureChoose:1.0.0'
-    compile 'com.github.jaydeepw:poly-picker:v1.0.22'
-    compile 'gov.nist.math:jama:1.0.3'
 
     // Unit testing dependencies
     testCompile 'junit:junit:4.12'
@@ -54,4 +49,10 @@ dependencies {
     // Set this dependency if you want to use Hamcrest matching
     testCompile 'org.hamcrest:hamcrest-library:1.1'
 
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'net.soulwolf.image:pictureChoose:1.0.0'
+    compile 'com.github.jaydeepw:poly-picker:v1.0.22'
+    compile 'gov.nist.math:jama:1.0.3'
+    compile 'com.android.support:design:22.2.0'
 }

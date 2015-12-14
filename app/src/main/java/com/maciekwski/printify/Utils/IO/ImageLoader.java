@@ -25,10 +25,10 @@ public class ImageLoader {
         }
         return result;
     }
-    private  static Bitmap loadSingleImageFromUri(Uri uri, Context context) {
+    public static Bitmap loadSingleImageFromUri(Uri uri, Context context) {
         Bitmap result = null;
         try {
-            result = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
+            result = MediaStore.Images.Media.getBitmap(context.getContentResolver(), fixUri(uri));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,6 +47,11 @@ public class ImageLoader {
     }
 
     private static Uri fixUri(Uri invalidUri){
-        return Uri.withAppendedPath(Uri.parse("file:///"), invalidUri.getPath());
+        String fix = "file:///";
+        if(!invalidUri.toString().startsWith(fix)) {
+            return Uri.withAppendedPath(Uri.parse(fix), invalidUri.getPath());
+        } else {
+            return invalidUri;
+        }
     }
 }

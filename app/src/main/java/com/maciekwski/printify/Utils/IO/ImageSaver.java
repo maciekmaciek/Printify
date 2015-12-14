@@ -24,12 +24,12 @@ public class ImageSaver {
         ArrayList<Uri> resultUris = new ArrayList<>();
 
         for(int i = 0; i<images.size(); i++) {
-            saveSingleImageReturnUri(images.get(i), resultUris, i);
+            saveSingleImageReturnUri(images.get(i), i);
         }
         return resultUris;
     }
 
-    private static void saveSingleImageReturnUri(Bitmap curBitmap, ArrayList<Uri> resultUris, int number) {
+    public static Uri saveSingleImageReturnUri(Bitmap curBitmap, int number) {
         String path = Environment.getExternalStorageDirectory().toString() + "/Printify";
         new File(path).mkdirs();
         String indFileName = createIndFileName(number);
@@ -44,7 +44,7 @@ public class ImageSaver {
         catch (IOException e) {
             e.printStackTrace();
         }
-        resultUris.add(Uri.fromFile(savedImage));
+        return Uri.fromFile(savedImage);
     }
 
     private static String createIndFileName(int index) {
@@ -53,5 +53,17 @@ public class ImageSaver {
         String name = sdf.format(new Date());
         name += "-" + number + ".png";
         return name;
+    }
+
+    public static void saveBitmapToGivenUri(Bitmap bitmap, Uri uri){
+        try {
+            FileOutputStream out = new FileOutputStream(new File(uri.getPath()));
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.flush();
+            out.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

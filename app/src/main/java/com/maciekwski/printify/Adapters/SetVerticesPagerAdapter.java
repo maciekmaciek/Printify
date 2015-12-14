@@ -15,9 +15,9 @@ import java.util.ArrayList;
  * maciekwski@gmail.com
  * on 26.10.2015.
  */
-public class VerticesSetterPagerAdapter extends FragmentStatePagerAdapter {
+public class SetVerticesPagerAdapter extends FragmentStatePagerAdapter {
     private ArrayList<Uri> imageUris;
-        public VerticesSetterPagerAdapter(FragmentManager fm, ArrayList<Uri> imageUris) {
+        public SetVerticesPagerAdapter(FragmentManager fm, ArrayList<Uri> imageUris) {
             super(fm);
             this.imageUris = imageUris;
         }

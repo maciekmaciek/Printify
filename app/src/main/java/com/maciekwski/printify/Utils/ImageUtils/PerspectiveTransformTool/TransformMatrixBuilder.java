@@ -26,7 +26,7 @@ public class TransformMatrixBuilder {
     }
 
     private Matrix calculateMatrixParameters() {
-        Matrix v1 = this.generateFirstMatrix(
+        Matrix v1 = this.generateFirstMatrix2(
                 resultVertices[0], imageVertices[0],
                 resultVertices[1], imageVertices[1],
                 resultVertices[2], imageVertices[2],
@@ -46,6 +46,19 @@ public class TransformMatrixBuilder {
                 {v21.x, v21.y, 1, 0, 0, 0, -v22.x*v21.x, -v22.x*v21.y},
                 {v11.x, v11.y, 1, 0, 0, 0, -v32.x*v31.x, -v32.x*v31.y},
                 {v31.x, v31.y, 1, 0, 0, 0, -v42.x*v41.x, -v42.x*v41.y},
+                {0, 0, 0, v11.x, v11.y, 1, -v12.y*v11.x, -v12.y*v11.y},
+                {0, 0, 0, v21.x, v21.y, 1, -v22.y*v21.x, -v22.y*v21.y},
+                {0, 0, 0, v31.x, v31.y, 1, -v32.y*v31.x, -v32.y*v31.y},
+                {0, 0, 0, v41.x, v41.y, 1, -v42.y*v41.x, -v42.y*v41.y}
+        };
+        return new Matrix(v1arr);
+    }
+    private Matrix generateFirstMatrix2(Point v11, Point v12, Point v21, Point v22, Point v31, Point v32, Point v41, Point v42) {
+        double[][] v1arr = {
+                {v11.x, v11.y, 1, 0, 0, 0, -v12.x*v11.x, -v12.x*v11.y},
+                {v21.x, v21.y, 1, 0, 0, 0, -v22.x*v21.x, -v22.x*v21.y},
+                {v31.x, v31.y, 1, 0, 0, 0, -v32.x*v31.x, -v32.x*v31.y},
+                {v41.x, v41.y, 1, 0, 0, 0, -v42.x*v41.x, -v42.x*v41.y},
                 {0, 0, 0, v11.x, v11.y, 1, -v12.y*v11.x, -v12.y*v11.y},
                 {0, 0, 0, v21.x, v21.y, 1, -v22.y*v21.x, -v22.y*v21.y},
                 {0, 0, 0, v31.x, v31.y, 1, -v32.y*v31.x, -v32.y*v31.y},

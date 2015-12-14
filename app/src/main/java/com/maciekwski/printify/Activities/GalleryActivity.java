@@ -12,9 +12,9 @@ package com.maciekwski.printify.Activities;
         import android.view.View;
         import android.widget.GridView;
 
+        import com.maciekwski.printify.Activities.PrintifyProcess.PrintifyActivity;
         import com.maciekwski.printify.Activities.VerticesSetter.VerticesSetterActivity;
         import com.maciekwski.printify.Adapters.PictureAdapter;
-        import com.maciekwski.printify.ImageProcessing.ProcessingOption;
         import com.maciekwski.printify.R;
         import net.soulwolf.image.picturelib.PictureProcess;
         import nl.changer.polypicker.Config;
@@ -26,24 +26,17 @@ package com.maciekwski.printify.Activities;
         import java.util.List;
 
 
-public class GalleryActivity extends AppCompatActivity {
+public class GalleryActivity extends Activity {
 
     static final boolean DEBUG = true;
 
     static final String  LOG_TAG = "GalleryActivity:";
-
     PictureProcess mPictureProcess;
-
-    Toolbar mToolbar;
-
     GridView mPictureGrid;
-
     List<Uri> mPictureList;
-    HashMap<ProcessingOption, Boolean> processingOptions;
     PictureAdapter mPictureAdapter;
 
     private static final String TAG = GalleryActivity.class.getSimpleName();
-
     private static final int INTENT_REQUEST_GET_IMAGES = 13;
     private static final int INTENT_REQUEST_GET_N_IMAGES = 14;
 
@@ -61,25 +54,16 @@ public class GalleryActivity extends AppCompatActivity {
         mPictureList = new ArrayList<>();
         mPictureAdapter = new PictureAdapter(this,mPictureList);
         mPictureGrid.setAdapter(mPictureAdapter);
-        initProcessingOptions();
-    }
-
-    private void initProcessingOptions() {
-        processingOptions = new HashMap<>();
-        processingOptions.put(ProcessingOption.A, true);
-        processingOptions.put(ProcessingOption.B, true);
-        processingOptions.put(ProcessingOption.C, true);
-        processingOptions.put(ProcessingOption.D, true);
     }
 
 
     public void getImages(View v) {
         Intent intent = new Intent(mContext, ImagePickerActivity.class);
         Config config = new Config.Builder()
-                .setTabBackgroundColor(R.color.white)    // set tab background color. Default white.
-                .setTabSelectionIndicatorColor(R.color.blue)
+                .setTabBackgroundColor(R.color.SeaGreen)    // set tab background color. Default white.
+                .setTabSelectionIndicatorColor(R.color.background_material_dark)
                 .setCameraButtonColor(R.color.orange)
-                .setSelectionLimit(5)    // set photo selection limit. Default unlimited selection.
+                .setSelectionLimit(10)    // set photo selection limit. Default unlimited selection.
                 .build();
         ImagePickerActivity.setConfig(config);
         startActivityForResult(intent, INTENT_REQUEST_GET_IMAGES);
@@ -163,7 +147,8 @@ public class GalleryActivity extends AppCompatActivity {
 
     public void startVerticesSetting(View view) {
         //TODO add options
-        Intent intent = new Intent(mContext, VerticesSetterActivity.class);
+        //Intent intent = new Intent(mContext, VerticesSetterActivity.class);
+        Intent intent = new Intent(mContext, PrintifyActivity.class);
         intent.putParcelableArrayListExtra("imageList", (ArrayList<Uri>)mPictureList);
         startActivity(intent);
     }

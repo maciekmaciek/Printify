@@ -157,4 +157,9 @@
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
     <color name="Black">#000000</color>
+    <color name="PrintifyGrey">#6d6d6d</color>
+    <color name="TransparentPrintifyGrey">#c06d6d6d</color>
+    <color name="VeryTransparentPrintifyGrey">#446d6d6d</color>
+    <color name="TransparentPrintifyGreen">#c03CB371</color>
+    <color name="VeryTransparentPrintifyGreen">#443CB371</color>
 </resources>

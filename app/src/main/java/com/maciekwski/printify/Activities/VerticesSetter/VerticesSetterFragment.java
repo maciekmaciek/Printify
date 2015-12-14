@@ -1,21 +1,17 @@
 package com.maciekwski.printify.Activities.VerticesSetter;
 
-import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import com.maciekwski.printify.R;
 import com.maciekwski.printify.Utils.IO.ImageLoader;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Maciej Wolański
@@ -57,8 +53,12 @@ public class VerticesSetterFragment extends Fragment implements View.OnTouchList
     }
 
     private void initiateFrameView(ViewGroup rootView) {
-        frameView = (FrameView)rootView.findViewById(R.id.frame_view_set_vertices);
+        frameView = (FrameView)rootView.findViewById(R.id.image_view_set_vertices);
         this.imageToDisplay = ImageLoader.loadCompressedImageFromUri((Uri)(getArguments().getParcelable("uri")), getActivity().getApplicationContext());
+        /*Picasso.with(getActivity().getApplicationContext()).
+                load(getArguments().<Uri>getParcelable("uri")).
+                fit().
+                into(frameView);*/
         frameView.setImageBitmap(imageToDisplay);
         frameView.addOnLayoutChangeListener(this);
         frameView.setOnTouchListener(this);

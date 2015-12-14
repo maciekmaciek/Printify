@@ -46,17 +46,7 @@ public class StartActivity extends ActionBarActivity {
     }
 
     public void startActivityOnClick(View v) {
-        Intent in;
-        switch (v.getId()) {
-            case R.id.button_take_pictures:
-                break;
-            case R.id.button_from_gallery:
-                chooseFromGallery();
-                break;
-            case R.id.button_your_pictures:
-                in = new Intent(getApplicationContext(), GalleryActivity.class);
-                startActivity(in);
-        }
+        chooseFromGallery();
     }
 
     private void chooseFromGallery() {
@@ -80,7 +70,6 @@ public class StartActivity extends ActionBarActivity {
 
                 }
             }
-       // }
         super.onActivityResult(requestCode, resultCode, data);
     }
 }
