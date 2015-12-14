@@ -147,8 +147,8 @@ public class GalleryActivity extends Activity {
 
     public void startVerticesSetting(View view) {
         //TODO add options
-        //Intent intent = new Intent(mContext, VerticesSetterActivity.class);
-        Intent intent = new Intent(mContext, PrintifyActivity.class);
+        Intent intent = new Intent(mContext, VerticesSetterActivity.class);
+        //Intent intent = new Intent(mContext, PrintifyActivity.class);
         intent.putParcelableArrayListExtra("imageList", (ArrayList<Uri>)mPictureList);
         startActivity(intent);
     }

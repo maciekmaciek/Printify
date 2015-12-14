@@ -138,8 +138,8 @@ public class PrintifyActivity extends ActionBarActivity {
         Bitmap resultBitmap = Bitmap.createBitmap(ppt.length, ppt[0].length, Bitmap.Config.ARGB_8888);
         int[] pixelBuffer = BWTableToARGBBufferConverter.convertPixelTable(ppt);
         resultBitmap.setPixels(pixelBuffer,0,ppt.length,0,0,ppt.length, ppt[0].length);
-        imagesToDisplay.set(urinum, ImageSaver.saveSingleImageReturnUri(resultBitmap, urinum));
-        //ImageSaver.saveBitmapToGivenUri(resultBitmap, uri);
+        //imagesToDisplay.set(urinum, ImageSaver.saveSingleImageReturnUri(resultBitmap, urinum));
+        ImageSaver.saveBitmapToGivenUri(resultBitmap, uri);
         resultBitmap.recycle();
     }
 
