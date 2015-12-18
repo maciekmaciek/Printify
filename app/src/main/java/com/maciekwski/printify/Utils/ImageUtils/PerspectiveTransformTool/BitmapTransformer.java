@@ -4,6 +4,7 @@ import Jama.Matrix;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
+import com.maciekwski.printify.Utils.ArrayToMatrixConverter;
 
 /**
  * Created by Maciej Wolański
@@ -12,6 +13,7 @@ import android.graphics.Point;
  */
 public class BitmapTransformer {
     private Bitmap imageToTransform;
+    private int[][] pixelsToTransform;
     private Point[] contentVertices;
     private Point[] finalVertices;
     private Matrix transformMatrix;
@@ -32,6 +34,7 @@ public class BitmapTransformer {
             this.sourceHeight = imageToTransform.getHeight();
             sourcePixels = new int[sourceWidth*sourceHeight];
             imageToTransform.getPixels(sourcePixels, 0, sourceWidth, 0, 0, sourceWidth, sourceHeight);
+            pixelsToTransform = ArrayToMatrixConverter.convert(sourcePixels, sourceWidth, sourceHeight);
             TransformMatrixBuilder transformMatrixBuilder = new TransformMatrixBuilder(contentVertices, finalVertices);
             this.transformMatrix = transformMatrixBuilder.generateTransformMatrix();
         }
@@ -104,10 +107,17 @@ public class BitmapTransformer {
             if (tempI + 1 >= sourceWidth)
                 tempI = sourceWidth - 2;
 
+            int topLeftColor = sourcePixels[sourceWidth*tempJ +tempI];
+            int topRightColor = sourcePixels[sourceWidth*(tempJ+1) + tempI];
+            int bottomLeftColor = sourcePixels[sourceWidth*tempJ + tempI +1];
+            int bottomRightColor = sourcePixels[sourceWidth*tempJ+1 +tempI+1];
+/*
+
             int topLeftColor = imageToTransform.getPixel(tempI,tempJ);
             int topRightColor = imageToTransform.getPixel(tempI + 1,tempJ);
             int bottomLeftColor = imageToTransform.getPixel(tempI, tempJ + 1);
             int bottomRightColor = imageToTransform.getPixel(tempI + 1, tempJ + 1);
+*/
 
             int red = this.interpolateRed(newXValue, newYValue,  topLeftColor,  topRightColor,  bottomLeftColor,  bottomRightColor);//tempCoord[0][0], tempCoord[1][0] , a.getRed(), b.getRed(), c.getRed(), d.getRed());
             int green = this.interpolateGreen(newXValue, newYValue, topLeftColor,  topRightColor,  bottomLeftColor, bottomRightColor);//tempCoord[0][0], tempCoord[1][0] , a.getRed(), b.getRed(), c.getRed(), d.getRed());

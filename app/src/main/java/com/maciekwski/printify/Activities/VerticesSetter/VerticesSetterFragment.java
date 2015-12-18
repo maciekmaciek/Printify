@@ -23,7 +23,7 @@ public class VerticesSetterFragment extends Fragment implements View.OnTouchList
     private Bitmap imageToDisplay;
     private FrameView frameView;
     private Point[] vertices;
-    private static final float TOUCH_TOLERANCE = 50;
+    private static final float TOUCH_TOLERANCE = 90;
 
 
     public VerticesSetterFragment(){
@@ -54,7 +54,7 @@ public class VerticesSetterFragment extends Fragment implements View.OnTouchList
 
     private void initiateFrameView(ViewGroup rootView) {
         frameView = (FrameView)rootView.findViewById(R.id.image_view_set_vertices);
-        this.imageToDisplay = ImageLoader.loadCompressedImageFromUri((Uri)(getArguments().getParcelable("uri")), getActivity().getApplicationContext());
+        this.imageToDisplay = ImageLoader.loadSingleImageFromUri((Uri)(getArguments().getParcelable("uri")), getActivity().getApplicationContext());
         /*Picasso.with(getActivity().getApplicationContext()).
                 load(getArguments().<Uri>getParcelable("uri")).
                 fit().

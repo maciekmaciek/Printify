@@ -62,8 +62,8 @@ public class GalleryActivity extends Activity {
         Config config = new Config.Builder()
                 .setTabBackgroundColor(R.color.SeaGreen)    // set tab background color. Default white.
                 .setTabSelectionIndicatorColor(R.color.background_material_dark)
-                .setCameraButtonColor(R.color.orange)
-                .setSelectionLimit(10)    // set photo selection limit. Default unlimited selection.
+                .setCameraButtonColor(R.color.SeaGreen)
+                .setSelectionLimit(5)    // set photo selection limit. Default unlimited selection.
                 .build();
         ImagePickerActivity.setConfig(config);
         startActivityForResult(intent, INTENT_REQUEST_GET_IMAGES);
@@ -151,5 +151,6 @@ public class GalleryActivity extends Activity {
         //Intent intent = new Intent(mContext, PrintifyActivity.class);
         intent.putParcelableArrayListExtra("imageList", (ArrayList<Uri>)mPictureList);
         startActivity(intent);
+        finish();
     }
 }

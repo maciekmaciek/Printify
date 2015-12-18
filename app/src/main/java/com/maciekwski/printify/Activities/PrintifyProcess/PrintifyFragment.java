@@ -49,7 +49,7 @@ public class PrintifyFragment extends Fragment{
 
     private void initiateFrameView(ViewGroup rootView) {
         ImageView imageView = (ImageView)rootView.findViewById(R.id.image_view_printify);
-        this.imageToDisplay = ImageLoader.loadCompressedImageFromUri((Uri)(getArguments().getParcelable("uri")), getActivity().getApplicationContext());
+        this.imageToDisplay = ImageLoader.loadSingleImageFromUri((Uri)(getArguments().getParcelable("uri")), getActivity().getApplicationContext());
         /*Picasso.with(getActivity().getApplicationContext()).
                 load(getArguments().<Uri>getParcelable("uri")).
                 fit().

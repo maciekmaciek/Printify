@@ -18,18 +18,16 @@ import java.util.ArrayList;
  * on 27.10.2015.
  */
 public class BitmapBorderCreator {
-    public static ArrayList<Uri> addBordersToImagesSaveThemToGetUris(ArrayList<Uri> sourceUris, double ratio, Context context) {
-        ArrayList<Uri> result = new ArrayList<>();
+    public static void addBordersToImages(ArrayList<Uri> sourceUris, double ratio, Context context) {
         Bitmap workerBitmap;
 
         for (Uri uri :
                 sourceUris) {
             workerBitmap = ImageLoader.loadSingleImageFromUri(uri, context);
             workerBitmap = addBorderToSingleImage(workerBitmap, ratio);
-            result.add(ImageSaver.saveSingleImageReturnUri(workerBitmap, result.size()));
+            ImageSaver.saveBitmapToGivenUri(workerBitmap,uri );
             workerBitmap.recycle();
         }
-        return result;
     }
 
     private static Bitmap addBorderToSingleImage(Bitmap image, double ratio){
