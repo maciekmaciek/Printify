@@ -1,4 +1,4 @@
-package com.maciekwski.printify.Utils.ImageUtils.Step2Preparation;
+package com.maciekwski.printify.Utils.ImageUtils;
 
 import android.graphics.Color;
 

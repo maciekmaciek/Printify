@@ -1,4 +1,4 @@
-package com.maciekwski.printify.Utils.ImageUtils.ContentFrameDetectingTool;
+package com.maciekwski.printify.Utils.ImageUtils.Future.ContentFrameDetectingTool;
 
 /**
  * Created by Maciej Wolański

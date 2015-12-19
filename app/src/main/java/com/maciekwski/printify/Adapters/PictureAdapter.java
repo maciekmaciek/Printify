@@ -1,10 +1,5 @@
 package com.maciekwski.printify.Adapters;
 
-/**
- * Created by Maciej Wolański
- * maciekwski@gmail.com
- * on 07.09.2015.
- */
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -12,25 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-
 import com.maciekwski.printify.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
 
-
-/**
- * author: Soulwolf Created on 2015/7/13 23:49.
- * email : Ching.Soulwolf@gmail.com
- */
 public class PictureAdapter extends BaseAdapter {
 
     Context mContext;
 
     List<Uri> mPictureList;
 
-    public PictureAdapter(Context context, List<Uri> pictures){
+    public PictureAdapter(Context context, List<Uri> pictures) {
         this.mContext = context;
         this.mPictureList = pictures;
     }
@@ -53,12 +42,12 @@ public class PictureAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        if(convertView == null){
+        if (convertView == null) {
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.listview_picture_item,null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.listview_picture_item, null);
             holder.mPictureView = (ImageView) convertView.findViewById(R.id.pi_picture_item_image);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         // load image
@@ -69,7 +58,7 @@ public class PictureAdapter extends BaseAdapter {
         return convertView;
     }
 
-    static class ViewHolder{
+    static class ViewHolder {
         public ImageView mPictureView;
     }
 }

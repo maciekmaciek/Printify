@@ -1,6 +1,5 @@
-package com.maciekwski.printify.Utils.ImageUtils.PerspectiveTransformTool;
+package com.maciekwski.printify.Utils.ImageUtils.Step1PerspectiveTransform;
 
-import android.graphics.Bitmap;
 import android.graphics.Point;
 
 /**

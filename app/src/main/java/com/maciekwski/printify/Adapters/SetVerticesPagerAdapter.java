@@ -1,9 +1,8 @@
 package com.maciekwski.printify.Adapters;
 
 import android.net.Uri;
-import android.support.v4.app.FragmentManager;
-import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import com.maciekwski.printify.Activities.VerticesSetter.VerticesSetterFragment;
 
@@ -17,18 +16,18 @@ import java.util.ArrayList;
  */
 public class SetVerticesPagerAdapter extends FragmentStatePagerAdapter {
     private ArrayList<Uri> imageUris;
-        public SetVerticesPagerAdapter(FragmentManager fm, ArrayList<Uri> imageUris) {
-            super(fm);
-            this.imageUris = imageUris;
-        }
+
+    public SetVerticesPagerAdapter(FragmentManager fm, ArrayList<Uri> imageUris) {
+        super(fm);
+        this.imageUris = imageUris;
+    }
 
 
-        @Override
-        public Fragment getItem(int position) {
-            VerticesSetterFragment fragment = VerticesSetterFragment.newInstance(imageUris.get(position), position);
-            return fragment;
-        }
-
+    @Override
+    public Fragment getItem(int position) {
+        VerticesSetterFragment fragment = VerticesSetterFragment.newInstance(imageUris.get(position), position);
+        return fragment;
+    }
 
 
     @Override

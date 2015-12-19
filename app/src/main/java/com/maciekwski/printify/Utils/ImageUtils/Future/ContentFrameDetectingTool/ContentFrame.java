@@ -1,4 +1,4 @@
-package com.maciekwski.printify.Utils.ImageUtils.ContentFrameDetectingTool;
+package com.maciekwski.printify.Utils.ImageUtils.Future.ContentFrameDetectingTool;
 
 
 import android.graphics.Point;
@@ -14,25 +14,25 @@ public class ContentFrame {
     private DensitySquare[][] squaresFrame;
     private Point[][] pointsFrame;
 
-    public ContentFrame(int height){
+    public ContentFrame(int height) {
         this.squaresFrame = new DensitySquare[height][2];
         pointsFrame = new Point[height][2];
     }
 
-    public void insertSquareToFrame(int row, DensitySquare candidate){
+    public void insertSquareToFrame(int row, DensitySquare candidate) {
         DensitySquare[] squareRow = this.squaresFrame[row];
-        if(!this.insertLeftSquare(squareRow, candidate)){
+        if (!this.insertLeftSquare(squareRow, candidate)) {
             {
                 this.insertRightSquare(squareRow, candidate);
             }
-            if(squareRow[1] == null){
+            if (squareRow[1] == null) {
                 squareRow[1] = candidate;
             }
         }
     }
 
     private boolean insertLeftSquare(DensitySquare[] squareRow, DensitySquare candidate) {
-        if(squareRow[0] == null){
+        if (squareRow[0] == null) {
             squareRow[0] = candidate;
             return true;
         } else {
@@ -41,11 +41,11 @@ public class ContentFrame {
     }
 
     private boolean insertRightSquare(DensitySquare[] squareRow, DensitySquare candidate) {
-        if(squareRow[1] == null){
+        if (squareRow[1] == null) {
             squareRow[1] = candidate;
             return true;
         } else {    //not sure if even needed
-            if(candidate.isRightTo(squareRow[1])){
+            if (candidate.isRightTo(squareRow[1])) {
                 squareRow[1] = candidate;
                 return true;
             }
@@ -53,10 +53,10 @@ public class ContentFrame {
         return false;
     }
 
-    public Point[][] generatePointsFrame(){
+    public Point[][] generatePointsFrame() {
 
         int firstFullRow = this.generateFirstPointsRow();
-        int lastFullRow = this.generateCenterPointsRows(firstFullRow+1);
+        int lastFullRow = this.generateCenterPointsRows(firstFullRow + 1);
         this.correctLastPointsRow(lastFullRow);
         this.cutEmptyRows();
         return pointsFrame;
@@ -64,18 +64,18 @@ public class ContentFrame {
 
     private void cutEmptyRows() {
         ArrayList<Point[]> cutPointsFrame = new ArrayList<>();
-        for(Point[] row: pointsFrame){
-            if(row[0] != null || row[1] != null) {
+        for (Point[] row : pointsFrame) {
+            if (row[0] != null || row[1] != null) {
                 cutPointsFrame.add(row);
             }
         }
-        pointsFrame = (Point[][])cutPointsFrame.toArray();
+        pointsFrame = (Point[][]) cutPointsFrame.toArray();
     }
 
     private int generateFirstPointsRow() {
         int firstFullRow = 0;
         boolean isFull = false;
-        for(; firstFullRow < pointsFrame.length && !isFull; firstFullRow++){
+        for (; firstFullRow < pointsFrame.length && !isFull; firstFullRow++) {
             isFull = this.tryGenerateFirstPointsRow(firstFullRow);
         }
         return firstFullRow;
@@ -84,15 +84,15 @@ public class ContentFrame {
     private boolean tryGenerateFirstPointsRow(int lastRowPosition) {
         DensitySquare left = squaresFrame[lastRowPosition][0];
         DensitySquare right = squaresFrame[lastRowPosition][1];
-        if(null != left){
-            if(null != right){
+        if (null != left) {
+            if (null != right) {
                 this.setFirstPointsRow(left, right, lastRowPosition);
             } else {
                 this.setFirstPointsRow(left, left, lastRowPosition);
             }
             return true;
         } else {
-            if(null != right) {
+            if (null != right) {
                 this.setFirstPointsRow(right, right, lastRowPosition);
                 return true;
             }
@@ -110,9 +110,9 @@ public class ContentFrame {
     private int generateCenterPointsRows(int startingRow) {
         int lastRow = startingRow;
         boolean addedPointsInLastRow;
-        for(int i = startingRow; i < pointsFrame.length; i++){
+        for (int i = startingRow; i < pointsFrame.length; i++) {
             addedPointsInLastRow = generateSingleCenterRow(i);
-            if(addedPointsInLastRow){
+            if (addedPointsInLastRow) {
                 lastRow = i;
             }
         }
@@ -122,15 +122,15 @@ public class ContentFrame {
     private boolean generateSingleCenterRow(int lastRowPosition) {
         DensitySquare left = squaresFrame[lastRowPosition][0];
         DensitySquare right = squaresFrame[lastRowPosition][1];
-        if(null != left){
-            if(null != right){
+        if (null != left) {
+            if (null != right) {
                 this.setCenterPointsRow(left, right, lastRowPosition);
             } else {
                 this.setCenterPointsRow(left, left, lastRowPosition);
             }
             return true;
         } else {
-            if(null != right) {
+            if (null != right) {
                 this.setCenterPointsRow(right, right, lastRowPosition);
                 return true;
             }
@@ -148,14 +148,14 @@ public class ContentFrame {
     private void correctLastPointsRow(int lastRowPosition) {
         DensitySquare left = squaresFrame[lastRowPosition][0];
         DensitySquare right = squaresFrame[lastRowPosition][1];
-        if(null != left){
-            if(null != right){
+        if (null != left) {
+            if (null != right) {
                 this.setLastRowPoints(left, right, lastRowPosition);
             } else {
                 this.setLastRowPoints(left, left, lastRowPosition);
             }
         } else {
-            if(null != right){
+            if (null != right) {
                 this.setLastRowPoints(right, right, lastRowPosition);
             }
         }

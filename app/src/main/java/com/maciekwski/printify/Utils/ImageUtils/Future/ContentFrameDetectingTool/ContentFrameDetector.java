@@ -1,4 +1,4 @@
-package com.maciekwski.printify.Utils.ImageUtils.ContentFrameDetectingTool;
+package com.maciekwski.printify.Utils.ImageUtils.Future.ContentFrameDetectingTool;
 
 import android.graphics.Bitmap;
 import android.graphics.Point;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * maciekwski@gmail.com
  * on 06.10.2015.
  */
+/*** Might want to use this for some kind of automatic edge detection***/
 public class ContentFrameDetector {
     private final int ROWS = 40;
     private Bitmap contentToDetect;
@@ -17,18 +18,18 @@ public class ContentFrameDetector {
     private double densityThreshold;
     private Point[][] contentFrame;
 
-    public ContentFrameDetector(Bitmap contentToDetect){
+    public ContentFrameDetector(Bitmap contentToDetect) {
         this.contentToDetect = contentToDetect;
     }
 
-    public Point[] detectContentFrame(){
+    public Point[] detectContentFrame() {
         this.generateSquares();
         this.findThreshold();
         this.buildContentFrame();
         return this.generateFourVertFrame();
     }
 
-        //generate squares
+    //generate squares
     private void generateSquares() {
         contentFrame = new Point[1][1];
     }
@@ -41,11 +42,11 @@ public class ContentFrameDetector {
     //build contentFrame
     private void buildContentFrame() {
         ContentFrame frameGenerator = new ContentFrame(densitySquaresGrid.size());
-        for(int i = 0; i < densitySquaresGrid.size(); i++){
+        for (int i = 0; i < densitySquaresGrid.size(); i++) {
             ArrayList<DensitySquare> squaresRow = densitySquaresGrid.get(i);
-            for(int j = 0; j < squaresRow.size(); i++){
+            for (int j = 0; j < squaresRow.size(); i++) {
                 DensitySquare square = squaresRow.get(j);
-                if(square.isOverThreshold(this.densityThreshold)){
+                if (square.isOverThreshold(this.densityThreshold)) {
                     frameGenerator.insertSquareToFrame(i, square);
                 }
             }
@@ -58,7 +59,6 @@ public class ContentFrameDetector {
         FourVertContentFrame frame = new FourVertContentFrame(this.contentFrame);
         return frame.getFrame();
     }
-
 
 
 }

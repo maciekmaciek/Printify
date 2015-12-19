@@ -1,10 +1,10 @@
-package com.maciekwski.printify.Utils.ImageUtils.PerspectiveTransformTool;
+package com.maciekwski.printify.Utils.ImageUtils.Step1PerspectiveTransform;
 
 import Jama.Matrix;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
-import com.maciekwski.printify.Utils.ArrayToMatrixConverter;
+import com.maciekwski.printify.Utils.Misc.ArrayToMatrixConverter;
 
 /**
  * Created by Maciej Wolański
@@ -26,13 +26,13 @@ public class BitmapTransformer {
     public BitmapTransformer(BitmapSizeWithContentVertices bswcv, Bitmap bitmap) {
         this.imageToTransform = bitmap;
         this.contentVertices = bswcv.contentVertices;
-        if(this.isNearRectangle()){
+        if (this.isNearRectangle()) {
             needsNoMatrix = true;
         } else {
             this.finalVertices = ResultRectangleBuilder.buildFromVertices(contentVertices);
             this.sourceWidth = imageToTransform.getWidth();
             this.sourceHeight = imageToTransform.getHeight();
-            sourcePixels = new int[sourceWidth*sourceHeight];
+            sourcePixels = new int[sourceWidth * sourceHeight];
             imageToTransform.getPixels(sourcePixels, 0, sourceWidth, 0, 0, sourceWidth, sourceHeight);
             pixelsToTransform = ArrayToMatrixConverter.convert(sourcePixels, sourceWidth, sourceHeight);
             TransformMatrixBuilder transformMatrixBuilder = new TransformMatrixBuilder(contentVertices, finalVertices);
@@ -40,17 +40,17 @@ public class BitmapTransformer {
         }
     }
 
-    public Bitmap transformImage(){
+    public Bitmap transformImage() {
         Bitmap resultBitmap;
         int[] resultPixels;
-        if(needsNoMatrix){
+        if (needsNoMatrix) {
             resultBitmap = this.transformRectangle();
         } else {
             resultBitmap = this.createNewSizedBitmap();
            /* for (int i = 0; i < resultBitmap.getWidth(); i++) {
                 this.transformSingleRow(i, resultBitmap);
             }*/
-            resultPixels = new int[resultBitmap.getWidth()*resultBitmap.getHeight()];
+            resultPixels = new int[resultBitmap.getWidth() * resultBitmap.getHeight()];
             this.transformPixels(resultPixels, resultBitmap.getWidth());
             resultBitmap.setPixels(resultPixels, 0, resultBitmap.getWidth(), 0, 0, resultBitmap.getWidth(), resultBitmap.getHeight());
         }
@@ -59,7 +59,7 @@ public class BitmapTransformer {
     }
 
     private void transformPixels(int[] resultPixels, int width) {
-        for(int i = 0; i < resultPixels.length; i++){
+        for (int i = 0; i < resultPixels.length; i++) {
             int curW = i % width;
             int curH = i / width;
             transformSinglePixel(curW, curH, resultPixels, i);
@@ -73,33 +73,27 @@ public class BitmapTransformer {
         topLeft.y = contentVertices[0].y < contentVertices[3].y ? contentVertices[0].y : contentVertices[3].y;
         bottomRight.x = contentVertices[1].x > contentVertices[2].x ? contentVertices[1].x : contentVertices[2].x;
         bottomRight.y = contentVertices[1].y > contentVertices[2].y ? contentVertices[1].y : contentVertices[2].y;
-        return Bitmap.createBitmap(imageToTransform,topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+        return Bitmap.createBitmap(imageToTransform, topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
     }
-/*
-    private void transformSingleRow(int row, Bitmap resultBitmap) {
-        for(int j = 0; j < resultBitmap.getHeight(); j++){
-            this.transformSinglePixel(row, j, resultBitmap);
-        }
-    }*/
 
-    private void transformSinglePixel(int row, int column, int[] resultPixels, int currentPixel){// Bitmap resultBitmap) {
+    private void transformSinglePixel(int row, int column, int[] resultPixels, int currentPixel) {// Bitmap resultBitmap) {
         int tempI;
         int tempJ;
-        Matrix tempCoord = new Matrix(3,1);
+        Matrix tempCoord = new Matrix(3, 1);
         Matrix tempResult;
         tempCoord.set(2, 0, 1);
         tempCoord.set(0, 0, row);
         tempCoord.set(1, 0, column);
         tempResult = transformMatrix.times(tempCoord);
-        tempCoord.set(0,0, tempResult.get(0,0)/tempResult.get(2,0));
-        tempCoord.set(1,0, tempResult.get(1,0)/tempResult.get(2,0));
+        tempCoord.set(0, 0, tempResult.get(0, 0) / tempResult.get(2, 0));
+        tempCoord.set(1, 0, tempResult.get(1, 0) / tempResult.get(2, 0));
         //tempI = (int)tempCoord[1][0]; było tak, dziwne!
         //tempJ = (int)tempCoord[0][0];
-        double newXValue = tempCoord.get(0,0);
-        double newYValue = tempCoord.get(1,0);
-        tempI = (int)newXValue;
-        tempJ = (int)newYValue;
-        if(this.pixelInImage(tempI, tempJ)) {
+        double newXValue = tempCoord.get(0, 0);
+        double newYValue = tempCoord.get(1, 0);
+        tempI = (int) newXValue;
+        tempJ = (int) newYValue;
+        if (this.pixelInImage(tempI, tempJ)) {
 
             if (tempJ + 1 >= sourceHeight)
                 tempJ = sourceHeight - 2;
@@ -107,10 +101,10 @@ public class BitmapTransformer {
             if (tempI + 1 >= sourceWidth)
                 tempI = sourceWidth - 2;
 
-            int topLeftColor = sourcePixels[sourceWidth*tempJ +tempI];
-            int topRightColor = sourcePixels[sourceWidth*(tempJ+1) + tempI];
-            int bottomLeftColor = sourcePixels[sourceWidth*tempJ + tempI +1];
-            int bottomRightColor = sourcePixels[sourceWidth*tempJ+1 +tempI+1];
+            int topLeftColor = sourcePixels[sourceWidth * tempJ + tempI];
+            int topRightColor = sourcePixels[sourceWidth * (tempJ + 1) + tempI];
+            int bottomLeftColor = sourcePixels[sourceWidth * tempJ + tempI + 1];
+            int bottomRightColor = sourcePixels[sourceWidth * tempJ + 1 + tempI + 1];
 /*
 
             int topLeftColor = imageToTransform.getPixel(tempI,tempJ);
@@ -119,9 +113,9 @@ public class BitmapTransformer {
             int bottomRightColor = imageToTransform.getPixel(tempI + 1, tempJ + 1);
 */
 
-            int red = this.interpolateRed(newXValue, newYValue,  topLeftColor,  topRightColor,  bottomLeftColor,  bottomRightColor);//tempCoord[0][0], tempCoord[1][0] , a.getRed(), b.getRed(), c.getRed(), d.getRed());
-            int green = this.interpolateGreen(newXValue, newYValue, topLeftColor,  topRightColor,  bottomLeftColor, bottomRightColor);//tempCoord[0][0], tempCoord[1][0] , a.getRed(), b.getRed(), c.getRed(), d.getRed());
-            int blue = this.interpolateBlue(newXValue, newYValue,  topLeftColor,  topRightColor,  bottomLeftColor,  bottomRightColor);//tempCoord[0][0], tempCoord[1][0] , a.getRed(), b.getRed(), c.getRed(), d.getRed());
+            int red = this.interpolateRed(newXValue, newYValue, topLeftColor, topRightColor, bottomLeftColor, bottomRightColor);//tempCoord[0][0], tempCoord[1][0] , a.getRed(), b.getRed(), c.getRed(), d.getRed());
+            int green = this.interpolateGreen(newXValue, newYValue, topLeftColor, topRightColor, bottomLeftColor, bottomRightColor);//tempCoord[0][0], tempCoord[1][0] , a.getRed(), b.getRed(), c.getRed(), d.getRed());
+            int blue = this.interpolateBlue(newXValue, newYValue, topLeftColor, topRightColor, bottomLeftColor, bottomRightColor);//tempCoord[0][0], tempCoord[1][0] , a.getRed(), b.getRed(), c.getRed(), d.getRed());
 
 
             if (red < 0) red = 0;
@@ -145,9 +139,11 @@ public class BitmapTransformer {
     private boolean pixelInImage(int tempI, int tempJ) {
         return tempI >= 0 && tempJ >= 0 && tempI < sourceWidth && tempJ < sourceHeight;
     }
+
     private int interpolateRed(double xCoord, double yCoord, int topLeftColor, int topRightColor, int bottomLeftColor, int bottomRightColor) {
         return BilinearInterpolator.interpolate(xCoord, yCoord, Color.red(topLeftColor), Color.red(topRightColor), Color.red(bottomLeftColor), Color.red(bottomRightColor));
     }
+
     private int interpolateGreen(double xCoord, double yCoord, int topLeftColor, int topRightColor, int bottomLeftColor, int bottomRightColor) {
         return BilinearInterpolator.interpolate(xCoord, yCoord, Color.green(topLeftColor), Color.green(topRightColor), Color.green(bottomLeftColor), Color.green(bottomRightColor));
     }
@@ -161,6 +157,7 @@ public class BitmapTransformer {
     }
 
     static final double RECT_MARGIN = 0.02;
+
     public boolean isNearRectangle() {
         boolean topRect = Math.abs(contentVertices[0].y - contentVertices[1].y) < RECT_MARGIN * imageToTransform.getHeight();
         boolean botRect = Math.abs(contentVertices[2].y - contentVertices[3].y) < RECT_MARGIN * imageToTransform.getHeight();

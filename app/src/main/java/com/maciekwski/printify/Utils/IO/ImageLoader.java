@@ -5,8 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.util.Pair;
-import com.maciekwski.printify.Utils.ImageUtils.BitmapResizer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,13 +16,6 @@ import java.util.ArrayList;
  */
 public class ImageLoader {
 
-    public static ArrayList<Bitmap> loadImagesFromUri(ArrayList<Uri> imageUris, Context context){
-        ArrayList<Bitmap> result = new ArrayList<>();
-        for(Uri uri : imageUris){
-            result.add(loadSingleImageFromUri(fixUri(uri), context));
-        }
-        return result;
-    }
     public static Bitmap loadSingleImageFromUri(Uri uri, Context context) {
         Bitmap result = null;
         try {
@@ -35,7 +26,7 @@ public class ImageLoader {
         return result;
     }
 
-    public static Bitmap loadCompressedImageFromUri(Uri uri, int maxDim){
+    public static Bitmap loadCompressedImageFromUri(Uri uri, int maxDim) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
 
         options.inJustDecodeBounds = true;
@@ -45,10 +36,10 @@ public class ImageLoader {
         return BitmapFactory.decodeFile(uri.getPath(), options);
     }
 
-    private static int calculateScalingFactor(int max, int imageWidth, int imageHeight){
-        if(imageWidth > max && imageWidth > imageHeight){
+    private static int calculateScalingFactor(int max, int imageWidth, int imageHeight) {
+        if (imageWidth > max && imageWidth > imageHeight) {
             return calculateInSampleSize(imageWidth, max);
-        } else  if(imageHeight > max && imageWidth < imageHeight){
+        } else if (imageHeight > max && imageWidth < imageHeight) {
             return calculateInSampleSize(imageHeight, max);
         } else {
             return 1;
@@ -58,23 +49,20 @@ public class ImageLoader {
     private static int calculateInSampleSize(int biggerSize, int max) {
         // Raw height and width of image
         int inSampleSize = 1;
-
         if (biggerSize > max) {
-
             final int halfBigger = biggerSize / 2;
-
             // Calculate the largest inSampleSize value that is a power of 2 and keeps both
             // height and width larger than the requested height and width.
-            while ((halfBigger /inSampleSize) > max) {
+            while ((halfBigger / inSampleSize) > max) {
                 inSampleSize *= 2;
             }
         }
         return inSampleSize;
     }
 
-    private static Uri fixUri(Uri invalidUri){
+    private static Uri fixUri(Uri invalidUri) {
         String fix = "file:///";
-        if(!invalidUri.toString().startsWith(fix)) {
+        if (!invalidUri.toString().startsWith(fix)) {
             return Uri.withAppendedPath(Uri.parse(fix), invalidUri.getPath());
         } else {
             return invalidUri;

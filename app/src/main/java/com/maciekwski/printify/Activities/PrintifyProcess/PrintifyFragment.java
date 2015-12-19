@@ -10,19 +10,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.maciekwski.printify.R;
 import com.maciekwski.printify.Utils.IO.ImageLoader;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by Maciej Wolański
  * maciekwski@gmail.com
  * on 26.10.2015.
  */
-public class PrintifyFragment extends Fragment{
+public class PrintifyFragment extends Fragment {
 
     private Bitmap imageToDisplay;
 
 
-    public PrintifyFragment(){
+    public PrintifyFragment() {
         super();
 
     }
@@ -48,19 +47,9 @@ public class PrintifyFragment extends Fragment{
     }
 
     private void initiateFrameView(ViewGroup rootView) {
-        ImageView imageView = (ImageView)rootView.findViewById(R.id.image_view_printify);
-        this.imageToDisplay = ImageLoader.loadSingleImageFromUri((Uri)(getArguments().getParcelable("uri")), getActivity().getApplicationContext());
-        /*Picasso.with(getActivity().getApplicationContext()).
-                load(getArguments().<Uri>getParcelable("uri")).
-                fit().
-                into(frameView);*/
+        ImageView imageView = (ImageView) rootView.findViewById(R.id.image_view_printify);
+        this.imageToDisplay = ImageLoader.loadSingleImageFromUri((Uri) (getArguments().getParcelable("uri")), getActivity().getApplicationContext());
         imageView.setImageBitmap(imageToDisplay);
-        /*//this.imageToDisplay = ImageLoader.loadCompressedImageFromUri((Uri)(getArguments().getParcelable("uri")), getActivity().getApplicationContext());
-        Picasso.with(getActivity().getApplicationContext()).
-                load(getArguments().<Uri>getParcelable("uri")).
-                fit().
-                into(imageView);
-        imageView.setImageBitmap(imageToDisplay);*/
     }
 
     @Override

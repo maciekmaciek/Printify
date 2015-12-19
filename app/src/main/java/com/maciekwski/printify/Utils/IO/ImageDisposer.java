@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * on 28.10.2015.
  */
 public class ImageDisposer {
-    public static void deleteImages(ArrayList<Uri> uris, Context context){
+    public static void deleteImages(ArrayList<Uri> uris, Context context) {
         for (Uri uriToDelete :
                 uris) {
             context.getContentResolver().delete(uriToDelete, null, null);

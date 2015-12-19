@@ -12,17 +12,20 @@ import android.view.MotionEvent;
  */
 public class PrintifyProcessViewPager extends ViewPager {
     Context appContext;
-    public  PrintifyProcessViewPager(Context context) {
+
+    public PrintifyProcessViewPager(Context context) {
         super(context);
 
         this.appContext = context;
     }
+
     private boolean isPagingEnabled = true;
 
-    public  PrintifyProcessViewPager(Context context, AttributeSet attrs) {
+    public PrintifyProcessViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.appContext = context;
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return this.isPagingEnabled && super.onTouchEvent(event);

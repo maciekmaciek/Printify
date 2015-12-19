@@ -1,19 +1,14 @@
 package com.maciekwski.printify.Activities.PrintifyProcess;
 
-import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import com.maciekwski.printify.Adapters.PrintifyPagerAdapter;
-import com.maciekwski.printify.Adapters.SetVerticesPagerAdapter;
 import com.maciekwski.printify.R;
-import com.maciekwski.printify.Utils.IO.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -35,13 +30,14 @@ public class PostPrintifyActivity extends ActionBarActivity {
     private void changeImages() {
         this.imagesToDisplay = getIntent().getParcelableArrayListExtra("imageList");
     }
+
     private void preparePager() {
         printifyPager = (ViewPager) findViewById(R.id.post_printify_pager);
         printifyPagerAdapter = new PrintifyPagerAdapter(getSupportFragmentManager(), imagesToDisplay);
         printifyPager.setAdapter(printifyPagerAdapter);
         PageChangeListener pageChangeListener = new PageChangeListener();
         printifyPager.addOnPageChangeListener(pageChangeListener);
-        ((TextView)findViewById(R.id.text_view_page_num)).setText(1 + " / " + printifyPagerAdapter.getCount());
+        ((TextView) findViewById(R.id.text_view_page_num)).setText(1 + " / " + printifyPagerAdapter.getCount());
 
     }
 
@@ -57,31 +53,10 @@ public class PostPrintifyActivity extends ActionBarActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_set_vertices, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     private class PageChangeListener implements ViewPager.OnPageChangeListener {
 
-        TextView indicator = (TextView)findViewById(R.id.text_view_page_num);
+        TextView indicator = (TextView) findViewById(R.id.text_view_page_num);
+
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         }
@@ -97,7 +72,7 @@ public class PostPrintifyActivity extends ActionBarActivity {
         }
     }
 
-    public void finishPrintify(){
+    public void finishPrintify(View v) {
         finish();
     }
 }

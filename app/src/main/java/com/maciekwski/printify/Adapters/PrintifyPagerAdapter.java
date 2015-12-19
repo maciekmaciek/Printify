@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import com.maciekwski.printify.Activities.PrintifyProcess.PrintifyFragment;
-import com.maciekwski.printify.Activities.VerticesSetter.VerticesSetterFragment;
 
 import java.util.ArrayList;
 
@@ -14,8 +13,9 @@ import java.util.ArrayList;
  * maciekwski@gmail.com
  * on 05.11.2015.
  */
-public class PrintifyPagerAdapter  extends FragmentStatePagerAdapter{
+public class PrintifyPagerAdapter extends FragmentStatePagerAdapter {
     private ArrayList<Uri> imageUris;
+
     public PrintifyPagerAdapter(FragmentManager fm, ArrayList<Uri> imageUris) {
         super(fm);
         this.imageUris = imageUris;
@@ -27,7 +27,6 @@ public class PrintifyPagerAdapter  extends FragmentStatePagerAdapter{
         PrintifyFragment fragment = PrintifyFragment.newInstance(imageUris.get(position), position);
         return fragment;
     }
-
 
 
     @Override

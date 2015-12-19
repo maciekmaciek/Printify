@@ -1,12 +1,9 @@
 package com.maciekwski.printify.Activities.VerticesSetter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.TextView;
-import com.maciekwski.printify.R;
 
 /**
  * Created by Maciej Wolański
@@ -15,17 +12,20 @@ import com.maciekwski.printify.R;
  */
 public class VerticesSetterViewPager extends ViewPager {
     Context appContext;
+
     public VerticesSetterViewPager(Context context) {
         super(context);
 
         this.appContext = context;
     }
+
     private boolean isPagingEnabled = true;
 
     public VerticesSetterViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.appContext = context;
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return this.isPagingEnabled && super.onTouchEvent(event);

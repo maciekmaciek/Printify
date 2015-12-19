@@ -1,4 +1,4 @@
-package com.maciekwski.printify.Utils.ImageUtils.ContentFrameDetectingTool;
+package com.maciekwski.printify.Utils.ImageUtils.Future.ContentFrameDetectingTool;
 
 import android.graphics.Point;
 
@@ -20,20 +20,25 @@ public class DensitySquare {
     public Point getTopLeft() {
         return topLeft;
     }
-    public Point getTopRight(){
+
+    public Point getTopRight() {
         return new Point(topLeft.x + length, topLeft.y);
     }
-    public Point getBottomLeft(){
+
+    public Point getBottomLeft() {
         return new Point(topLeft.x, topLeft.y + length);
     }
-    public Point getBottomRight(){
+
+    public Point getBottomRight() {
         return new Point(topLeft.x + length, topLeft.y + length);
     }
-    public Point getCenterLeft(){
-        return new Point(topLeft.x, topLeft.y + length/2);
+
+    public Point getCenterLeft() {
+        return new Point(topLeft.x, topLeft.y + length / 2);
     }
-    public Point getCenterRight(){
-        return new Point(topLeft.x + length, topLeft.y + length/2);
+
+    public Point getCenterRight() {
+        return new Point(topLeft.x + length, topLeft.y + length / 2);
     }
 
     public int getLength() {
@@ -48,11 +53,11 @@ public class DensitySquare {
         return density;
     }
 
-    public boolean isOverThreshold(double givenThreshold){
+    public boolean isOverThreshold(double givenThreshold) {
         return this.density >= givenThreshold;
     }
 
-    public boolean isRightTo(DensitySquare candidate){
+    public boolean isRightTo(DensitySquare candidate) {
         return this.topLeft.x > candidate.getTopLeft().x;
     }
 }

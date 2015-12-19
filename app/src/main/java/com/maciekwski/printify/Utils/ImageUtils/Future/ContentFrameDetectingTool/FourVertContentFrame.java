@@ -1,4 +1,4 @@
-package com.maciekwski.printify.Utils.ImageUtils.ContentFrameDetectingTool;
+package com.maciekwski.printify.Utils.ImageUtils.Future.ContentFrameDetectingTool;
 
 import android.graphics.Point;
 
@@ -9,18 +9,18 @@ import android.graphics.Point;
  */
 public class FourVertContentFrame {
     Point[] frame;
-    public FourVertContentFrame(Point[][] contentFrame){
+
+    public FourVertContentFrame(Point[][] contentFrame) {
         frame = new Point[4];
         generateFrame(contentFrame);
     }
 
-    private void generateFrame(Point[][] contentFrame){
-        // TODO ale będzie!!
+    private void generateFrame(Point[][] contentFrame) {
     }
 
-    public Point[] getFrame(){
+    public Point[] getFrame() {
         Point[] newFrame = new Point[4];
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             newFrame[i] = new Point(frame[i]);
         }
         return newFrame;

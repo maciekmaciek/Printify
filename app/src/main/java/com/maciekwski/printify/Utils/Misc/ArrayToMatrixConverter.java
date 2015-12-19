@@ -1,6 +1,4 @@
-package com.maciekwski.printify.Utils;
-
-import android.util.Log;
+package com.maciekwski.printify.Utils.Misc;
 
 import java.util.Arrays;
 

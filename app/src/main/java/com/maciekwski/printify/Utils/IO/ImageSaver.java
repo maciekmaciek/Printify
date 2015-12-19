@@ -1,10 +1,8 @@
 package com.maciekwski.printify.Utils.IO;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
-import android.text.format.DateFormat;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,10 +18,10 @@ import java.util.Locale;
  * on 27.10.2015.
  */
 public class ImageSaver {
-    public static ArrayList<Uri> saveImagesReturnUris(ArrayList<Bitmap> images){
+    public static ArrayList<Uri> saveImagesReturnUris(ArrayList<Bitmap> images) {
         ArrayList<Uri> resultUris = new ArrayList<>();
 
-        for(int i = 0; i<images.size(); i++) {
+        for (int i = 0; i < images.size(); i++) {
             saveSingleImageReturnUri(images.get(i), i);
         }
         return resultUris;
@@ -40,8 +38,7 @@ public class ImageSaver {
             curBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.flush();
             out.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return Uri.fromFile(savedImage);
@@ -55,14 +52,13 @@ public class ImageSaver {
         return name;
     }
 
-    public static void saveBitmapToGivenUri(Bitmap bitmap, Uri uri){
+    public static void saveBitmapToGivenUri(Bitmap bitmap, Uri uri) {
         try {
             FileOutputStream out = new FileOutputStream(new File(uri.getPath()));
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.flush();
             out.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

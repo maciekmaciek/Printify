@@ -1,36 +1,28 @@
 package com.maciekwski.printify.Activities;
 
-        import android.app.Activity;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.net.Uri;
-        import android.os.Bundle;
-        import android.os.Parcelable;
-        import android.support.v7.app.AppCompatActivity;
-        import android.support.v7.widget.Toolbar;
-        import android.util.Log;
-        import android.view.View;
-        import android.widget.GridView;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
+import android.view.View;
+import android.widget.GridView;
+import com.maciekwski.printify.Activities.VerticesSetter.VerticesSetterActivity;
+import com.maciekwski.printify.Adapters.PictureAdapter;
+import com.maciekwski.printify.R;
+import net.soulwolf.image.picturelib.PictureProcess;
+import nl.changer.polypicker.Config;
+import nl.changer.polypicker.ImagePickerActivity;
 
-        import com.maciekwski.printify.Activities.PrintifyProcess.PrintifyActivity;
-        import com.maciekwski.printify.Activities.VerticesSetter.VerticesSetterActivity;
-        import com.maciekwski.printify.Adapters.PictureAdapter;
-        import com.maciekwski.printify.R;
-        import net.soulwolf.image.picturelib.PictureProcess;
-        import nl.changer.polypicker.Config;
-        import nl.changer.polypicker.ImagePickerActivity;
-
-        import java.util.ArrayList;
-        import java.util.HashMap;
-        import java.util.HashSet;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 
 public class GalleryActivity extends Activity {
 
-    static final boolean DEBUG = true;
-
-    static final String  LOG_TAG = "GalleryActivity:";
     PictureProcess mPictureProcess;
     GridView mPictureGrid;
     List<Uri> mPictureList;
@@ -52,7 +44,7 @@ public class GalleryActivity extends Activity {
         mPictureProcess = new PictureProcess(this);
 
         mPictureList = new ArrayList<>();
-        mPictureAdapter = new PictureAdapter(this,mPictureList);
+        mPictureAdapter = new PictureAdapter(this, mPictureList);
         mPictureGrid.setAdapter(mPictureAdapter);
     }
 
@@ -96,60 +88,18 @@ public class GalleryActivity extends Activity {
             }
         }
     }
-/*
-    private void showMedia() {
-        // Remove all views before
-        // adding the new ones.
-        mSelectedImagesContainer.removeAllViews();
 
-        Iterator<Uri> iterator = mMedia.iterator();
-        ImageInternalFetcher imageFetcher = new ImageInternalFetcher(this, 500);
-        while (iterator.hasNext()) {
-            Uri uri = iterator.next();
-
-            // showImage(uri);
-            Log.i(TAG, " uri: " + uri);
-            if (mMedia.size() >= 1) {
-                mSelectedImagesContainer.setVisibility(View.VISIBLE);
-            }
-
-            View imageHolder = LayoutInflater.from(this).inflate(R.layout.media_layout, null);
-
-            // View removeBtn = imageHolder.findViewById(R.id.remove_media);
-            // initRemoveBtn(removeBtn, imageHolder, uri);
-            ImageView thumbnail = (ImageView) imageHolder.findViewById(R.id.media_image);
-
-            if (!uri.toString().contains("content://")) {
-                // probably a relative uri
-                uri = Uri.fromFile(new File(uri.toString()));
-            }
-
-            imageFetcher.loadImage(uri, thumbnail);
-
-            mSelectedImagesContainer.addView(imageHolder);
-
-            // set the dimension to correctly
-            // show the image thumbnail.
-            int wdpx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300, getResources().getDisplayMetrics());
-            int htpx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics());
-            thumbnail.setLayoutParams(new FrameLayout.LayoutParams(wdpx, htpx));
-        }
-    }
-*/
-
-    protected void showMedia(){
+    protected void showMedia() {
         mPictureList.clear();
-        if(!mMedia.isEmpty()){
+        if (!mMedia.isEmpty()) {
             mPictureList.addAll(mMedia);
         }
         mPictureAdapter.notifyDataSetChanged();
     }
 
     public void startVerticesSetting(View view) {
-        //TODO add options
         Intent intent = new Intent(mContext, VerticesSetterActivity.class);
-        //Intent intent = new Intent(mContext, PrintifyActivity.class);
-        intent.putParcelableArrayListExtra("imageList", (ArrayList<Uri>)mPictureList);
+        intent.putParcelableArrayListExtra("imageList", (ArrayList<Uri>) mPictureList);
         startActivity(intent);
         finish();
     }

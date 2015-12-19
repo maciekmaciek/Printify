@@ -1,4 +1,4 @@
-package com.maciekwski.printify.Utils.ImageUtils.PerspectiveTransformTool;
+package com.maciekwski.printify.Utils.ImageUtils.Step1PerspectiveTransform;
 
 /**
  * Created by Maciej Wolański
@@ -14,6 +14,6 @@ public class BilinearInterpolator {
         double Xab = alpha * b + (1 - alpha) * a;
         double Xcd = alpha * d + (1 - alpha) * c;
 
-        return (int)Math.round(beta * Xcd + (1 - beta) * Xab);
+        return (int) Math.round(beta * Xcd + (1 - beta) * Xab);
     }
 }

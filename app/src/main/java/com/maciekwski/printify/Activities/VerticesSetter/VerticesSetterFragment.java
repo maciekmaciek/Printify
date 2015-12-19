@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.maciekwski.printify.R;
 import com.maciekwski.printify.Utils.IO.ImageLoader;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by Maciej Wolański
@@ -26,7 +25,7 @@ public class VerticesSetterFragment extends Fragment implements View.OnTouchList
     private static final float TOUCH_TOLERANCE = 90;
 
 
-    public VerticesSetterFragment(){
+    public VerticesSetterFragment() {
         super();
 
     }
@@ -53,12 +52,8 @@ public class VerticesSetterFragment extends Fragment implements View.OnTouchList
     }
 
     private void initiateFrameView(ViewGroup rootView) {
-        frameView = (FrameView)rootView.findViewById(R.id.image_view_set_vertices);
-        this.imageToDisplay = ImageLoader.loadSingleImageFromUri((Uri)(getArguments().getParcelable("uri")), getActivity().getApplicationContext());
-        /*Picasso.with(getActivity().getApplicationContext()).
-                load(getArguments().<Uri>getParcelable("uri")).
-                fit().
-                into(frameView);*/
+        frameView = (FrameView) rootView.findViewById(R.id.image_view_set_vertices);
+        this.imageToDisplay = ImageLoader.loadSingleImageFromUri((Uri) (getArguments().getParcelable("uri")), getActivity().getApplicationContext());
         frameView.setImageBitmap(imageToDisplay);
         frameView.addOnLayoutChangeListener(this);
         frameView.setOnTouchListener(this);
@@ -66,7 +61,7 @@ public class VerticesSetterFragment extends Fragment implements View.OnTouchList
     }
 
     private void setFrameViewVerticesOrUpdateFragmentVertices() {
-        if(this.vertices == null){
+        if (this.vertices == null) {
             this.vertices = frameView.vertices;
         } else {
             frameView.vertices = this.vertices;
@@ -80,12 +75,12 @@ public class VerticesSetterFragment extends Fragment implements View.OnTouchList
     }
 
 
-    public void setParentVertices(Point[] vertices){
-        ((VerticesSetterActivity)getActivity()).allVertices[getArguments().getInt("position")] = vertices;
+    public void setParentVertices(Point[] vertices) {
+        ((VerticesSetterActivity) getActivity()).allVertices[getArguments().getInt("position")] = vertices;
     }
 
     private void takeVerticesFromParent() {
-        this.vertices = ((VerticesSetterActivity)getActivity()).allVertices[getArguments().getInt("position")];
+        this.vertices = ((VerticesSetterActivity) getActivity()).allVertices[getArguments().getInt("position")];
 
     }
 
@@ -118,8 +113,8 @@ public class VerticesSetterFragment extends Fragment implements View.OnTouchList
 
     private int touch_start(float x, float y) {
 
-        for(int i = 0; i < vertices.length; i++){
-            if(this.isClose(x,y, vertices[i])){
+        for (int i = 0; i < vertices.length; i++) {
+            if (this.isClose(x, y, vertices[i])) {
                 return i;
             }
         }
@@ -134,13 +129,13 @@ public class VerticesSetterFragment extends Fragment implements View.OnTouchList
     }
 
     private void touch_move(float x, float y) {
-        vertices[currentPoint].x = (int)x;
-        vertices[currentPoint].y = (int)y;
+        vertices[currentPoint].x = (int) x;
+        vertices[currentPoint].y = (int) y;
     }
 
     private void touch_up(float x, float y) {
-        vertices[currentPoint].x = (int)x;
-        vertices[currentPoint].y = (int)y;
+        vertices[currentPoint].x = (int) x;
+        vertices[currentPoint].y = (int) y;
         currentPoint = -1;
     }
 
@@ -148,13 +143,13 @@ public class VerticesSetterFragment extends Fragment implements View.OnTouchList
     public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
         this.takeVerticesFromParent();
         this.setFrameViewVerticesOrUpdateFragmentVertices();
-        if(oldLeft == 0){
+        if (oldLeft == 0) {
             this.setParentWidthHeightInfo(right, bottom);
         }
     }
 
     private void setParentWidthHeightInfo(int right, int bottom) {
-        ((VerticesSetterActivity)getActivity()).height = bottom;
-        ((VerticesSetterActivity)getActivity()).width = right;
+        ((VerticesSetterActivity) getActivity()).height = bottom;
+        ((VerticesSetterActivity) getActivity()).width = right;
     }
 }
